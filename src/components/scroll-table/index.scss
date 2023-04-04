@@ -1,0 +1,146 @@
+.t-table-page {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+
+  .t-table-box {
+    width: fit-content;
+
+    // 头部公用
+    .t-table-header {
+      position: sticky;
+      top: 0;
+      display: flex;
+      font-size: 14px;
+      height: 0;
+      text-align: center;
+    }
+
+    .header_content {
+      //display: flex;
+      //justify-content: center;
+      //align-items: center;
+    }
+
+    .header_item {
+      position: relative;
+      flex-shrink: 0;
+      width: 80px;
+      overflow-wrap: break-word;
+      border-bottom: 1px solid #e8e8e8;
+      background: #fafafa;
+      transition: background 0.3s;
+      //padding-right: 20px;
+      word-break: keep-all; /* 不换行 */
+      white-space: nowrap; /* 不换行 */
+      overflow: hidden; /* 内容超出宽度时隐藏超出部分的内容 */
+      text-overflow: ellipsis; /* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用。*/
+    }
+
+    .header_item-scroll {
+      overflow: scroll;
+      text-overflow: clip;
+    }
+    // 头部公用 end
+
+    // 列表单元格
+    .box_content {
+      display: flex;
+      height: 40px;
+      line-height: 40px;
+      text-align: center;
+
+      .box_content-item {
+        position: relative;
+        flex-shrink: 0;
+        width: 80px;
+        overflow-wrap: break-word;
+        border-bottom: 1px solid #e8e8e8;
+        transition: background 0.3s;
+        //padding-right: 20px;
+        word-break: keep-all; /* 不换行 */
+        white-space: nowrap; /* 不换行 */
+        overflow: hidden; /* 内容超出宽度时隐藏超出部分的内容 */
+        text-overflow: ellipsis; /* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用。*/
+      }
+    }
+
+    .box_content:nth-child(odd) {
+      background: #FFFFFF;
+    }
+
+    .box_content:nth-child(even) {
+      background: #fafafa;
+    }
+
+    // 列表单元格
+
+
+    // 头部
+    .t-table-box_header {
+      z-index: 4;
+    }
+
+    .t-table-box_left_header {
+      z-index: 5;
+      height: auto;
+
+    }
+
+    // 头部
+
+
+    // 列表
+    .t-table-box_content {
+      height: 0;
+      position: absolute;
+      top: 61px;
+    }
+
+    // 列表
+
+
+    // 左边固定
+    .t-table-box_left {
+      position: sticky;
+      top: 0;
+      left: 0;
+      width: 240px;
+      z-index: 8;
+      background: #FFFFFF;
+
+      .t-table-box_left_box {
+
+      }
+    }
+
+    .t-table-box_left_shadow {
+      box-shadow: 8px 4px 16px 0px rgba(0, 0, 0, 0.08);
+    }
+
+    // 左右固定
+
+
+
+  }
+
+
+  .t-table-page_empty {
+    position: absolute;
+    top: 0;
+    z-index: 1000;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    color: rgba(0,0,0, .6);
+    font-size: 24rpx;
+  }
+}

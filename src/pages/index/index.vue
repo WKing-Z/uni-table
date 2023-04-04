@@ -1,49 +1,78 @@
 <template>
-	<view class="content">
-		<image class="logo" src="/static/logo.png"></image>
-		<view>
-			<text class="title">{{title}}</text>
-		</view>
-	</view>
+  <view>
+    <scroll-table
+        :is-page="true"
+        :is-load-more="isLoadMore"
+        :loading-type="loadMoreStatus"
+        @onScrollToLower="onScrollToLower"
+        :list-data="list"
+    ></scroll-table>
+  </view>
 </template>
-
 <script>
-	export default {
-		data() {
-			return {
-				title: 'Hello'
-			}
-		},
-		onLoad() {
+import scrollTable from "../../components/scroll-table/scroll-table.vue";
 
-		},
-		methods: {
+export default {
+  name: 'testView',
+  data() {
+    return {
 
-		}
-	}
+      isLoadMore: false,
+      loadMoreStatus: 'loading',
+      list: [],
+      pageIndex: 1,
+      totalPage: 4,
+    }
+  },
+  components: {scrollTable},
+  methods: {
+    onSearch(index = 1) {
+      const item = {
+        name: '就会',
+        age: '1',
+        one: '453',
+        two: '2',
+        three: '345',
+        four: '234',
+        five: '34',
+        six: '355',
+      }
+
+      let newList = []
+      for (let i = 0; i < 40; i++) {
+        item.age = i + 1
+        newList.push(item)
+      }
+
+      this.pageIndex = index
+      return newList
+    },
+    onScrollToLower() {
+      const {totalPage, pageIndex} = this
+      const _this = this
+
+      if (this.isLoadMore) return false
+
+      this.isLoadMore = true
+
+      if (pageIndex >= totalPage) {
+        this.loadMoreStatus = 'onMore'
+        return false
+      }
+
+      const nextPageIndex = pageIndex + 1
+
+      setTimeout(function () {
+        const newList = _this.onSearch(nextPageIndex)
+        _this.list = _this.list.concat(newList)
+        _this.isLoadMore = false
+      }, 2000)
+    },
+  },
+  created() {
+    this.list = this.onSearch(1)
+  }
+
+
+}
 </script>
-
-<style>
-	.content {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-	}
-
-	.logo {
-		height: 200rpx;
-		width: 200rpx;
-		margin: 200rpx auto 50rpx auto;
-	}
-
-	.text-area {
-		display: flex;
-		justify-content: center;
-	}
-
-	.title {
-		font-size: 36rpx;
-		color: #8f8f94;
-	}
-</style>
